@@ -8,77 +8,183 @@
 <script src="https://cdn.tailwindcss.com"></script>
 
 <style>
-body { background:#0b0b0f; font-family:sans-serif; }
+body {
+  background:#050507;
+  overflow-x:hidden;
+  font-family:sans-serif;
+}
+
+/* Gradient Glow */
 .glow {
   background: linear-gradient(90deg,#7c3aed,#06b6d4);
   -webkit-background-clip:text;
   color:transparent;
 }
+
+/* Glass Card */
 .card {
-  background:rgba(255,255,255,0.03);
-  border:1px solid rgba(255,255,255,0.08);
-  backdrop-filter:blur(10px);
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.1);
+  backdrop-filter:blur(15px);
+  transition:0.4s;
+}
+.card:hover {
+  transform: translateY(-12px) rotateX(8deg) rotateY(-5deg);
+}
+
+/* Button */
+.btn {
+  background: linear-gradient(90deg,#7c3aed,#06b6d4);
+  transition:0.3s;
+}
+.btn:hover {
+  transform: scale(1.1);
+}
+
+/* Floating Gradient */
+.blur {
+  position:absolute;
+  width:400px;
+  height:400px;
+  border-radius:50%;
+  filter:blur(120px);
+  animation: float 8s infinite alternate;
+}
+.b1 { background:#7c3aed55; top:10%; left:5%; }
+.b2 { background:#06b6d455; bottom:10%; right:5%; }
+
+@keyframes float {
+  from { transform: translateY(0); }
+  to { transform: translateY(60px); }
+}
+
+/* Fade */
+.fade {
+  opacity:0;
+  transform:translateY(60px);
+  transition:1s;
+}
+.fade.show {
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* Mouse 3D tilt */
+.tilt {
+  transition: transform 0.2s;
 }
 </style>
 </head>
 
 <body class="text-white">
 
+<!-- BACKGROUND -->
+<div class="blur b1"></div>
+<div class="blur b2"></div>
+
+<!-- NAV -->
+<nav class="flex justify-between items-center px-8 py-5">
+<h1 class="text-xl font-bold glow">THRONEBRONX</h1>
+<a href="#cta" class="btn px-5 py-2 rounded-lg">Book Call</a>
+</nav>
+
 <!-- HERO -->
-<section class="text-center py-28 px-6">
+<section class="text-center py-28 px-6 fade">
 <h1 class="text-5xl md:text-7xl font-bold mb-6">
-THRONEBRONX <span class="glow">AI AGENCY</span>
+AI Systems <br>
+<span class="glow">That Print Revenue</span>
 </h1>
 
-<p class="text-gray-400 mb-8">
-We build AI systems that generate leads & revenue.
+<p class="text-gray-400 mb-8 max-w-xl mx-auto">
+Automation • Ads • Funnels • Growth
 </p>
 
-<button class="bg-gradient-to-r from-purple-600 to-cyan-500 px-8 py-4 rounded-xl">
-Get Started
+<button onclick="Calendly.initPopupWidget({url:'https://calendly.com/YOURNAME'});return false;" 
+class="btn px-8 py-4 rounded-xl text-lg">
+Book a Call →
 </button>
 </section>
 
 <!-- SERVICES -->
-<section class="py-20 px-6 max-w-6xl mx-auto text-center">
-<h2 class="text-3xl font-bold mb-10">Our Services</h2>
+<section class="py-20 px-6 max-w-6xl mx-auto text-center fade">
+<h2 class="text-3xl font-bold mb-14">Services</h2>
 
 <div class="grid md:grid-cols-3 gap-8">
 
-<div class="card p-6 rounded-xl">
-<h3 class="text-xl font-bold mb-2">AI Chatbots</h3>
-<p class="text-gray-400">Automate customer support & sales</p>
+<div class="card p-6 rounded-xl tilt">
+<h3 class="text-xl font-bold mb-2">AI Automation</h3>
+<p class="text-gray-400">Automate your business systems</p>
 </div>
 
-<div class="card p-6 rounded-xl">
+<div class="card p-6 rounded-xl tilt">
 <h3 class="text-xl font-bold mb-2">Paid Ads</h3>
-<p class="text-gray-400">Meta & Google ads scaling</p>
+<p class="text-gray-400">Scale with Meta & Google ads</p>
 </div>
 
-<div class="card p-6 rounded-xl">
-<h3 class="text-xl font-bold mb-2">Lead Generation</h3>
-<p class="text-gray-400">High-quality client acquisition</p>
+<div class="card p-6 rounded-xl tilt">
+<h3 class="text-xl font-bold mb-2">Funnels</h3>
+<p class="text-gray-400">Convert traffic into clients</p>
 </div>
 
 </div>
 </section>
 
 <!-- RESULTS -->
-<section class="py-20 text-center">
+<section class="py-20 text-center fade">
 <h2 class="text-3xl font-bold mb-6">Results</h2>
-<p class="text-gray-400">We help clients grow 3X–5X 🚀</p>
+<p class="text-gray-400 mb-10">5X growth in 60 days</p>
+
+<div class="flex justify-center gap-10 text-xl">
+<div>🚀 5X</div>
+<div>📈 300+</div>
+<div>💰 ROI</div>
+</div>
 </section>
 
 <!-- CTA -->
-<section class="py-20 text-center">
+<section id="cta" class="py-24 text-center fade">
 <h2 class="text-4xl font-bold mb-6">
-Let’s Scale Your Business
+Ready to Scale?
 </h2>
 
-<button class="bg-purple-600 px-8 py-4 rounded-xl">
-Contact Now
+<button onclick="Calendly.initPopupWidget({url:'https://calendly.com/YOURNAME'});return false;" 
+class="btn px-10 py-4 rounded-xl text-lg">
+Book a Call
 </button>
 </section>
+
+<!-- Calendly -->
+<script src="https://assets.calendly.com/assets/external/widget.js"></script>
+
+<!-- Animations -->
+<script>
+// Scroll fade
+const faders = document.querySelectorAll(".fade");
+window.addEventListener("scroll", () => {
+  faders.forEach(el => {
+    if(el.getBoundingClientRect().top < window.innerHeight - 100){
+      el.classList.add("show");
+    }
+  });
+});
+
+// Load
+window.onload = () => {
+  faders.forEach(el => el.classList.add("show"));
+};
+
+// 3D tilt effect
+document.querySelectorAll(".tilt").forEach(card => {
+  card.addEventListener("mousemove", e => {
+    let x = (window.innerWidth/2 - e.pageX)/25;
+    let y = (window.innerHeight/2 - e.pageY)/25;
+    card.style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
+  });
+  card.addEventListener("mouseleave", () => {
+    card.style.transform = "rotateY(0) rotateX(0)";
+  });
+});
+</script>
 
 </body>
 </html>
